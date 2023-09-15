@@ -1,0 +1,78 @@
+{
+	"name": "delay",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Orders_sink",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText2",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          order_id as string,",
+				"          customer_id as string,",
+				"          vendor_id as string,",
+				"          ship_mode as string,",
+				"          order_status as string,",
+				"          order_purchase_date as timestamp,",
+				"          order_approved_at as timestamp,",
+				"          order_delivered_carrier_date as timestamp,",
+				"          order_delivered_customer_date as timestamp,",
+				"          order_estimated_delivery_date as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"source1 select(mapColumn(",
+				"          order_id,",
+				"          order_delivered_customer_date,",
+				"          order_estimated_delivery_date",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 derive(delay = (order_delivered_customer_date-order_estimated_delivery_date)/86400000) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          order_id,",
+				"          delay",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          order_id as string,",
+				"          delay as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}

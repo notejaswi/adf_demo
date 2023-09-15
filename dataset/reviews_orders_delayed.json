@@ -1,0 +1,32 @@
+{
+	"name": "reviews_orders_delayed",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "copy_globalmartdata_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "insights"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "order_id",
+				"type": "String"
+			},
+			{
+				"name": "delay",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

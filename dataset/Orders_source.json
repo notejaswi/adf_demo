@@ -1,0 +1,68 @@
+{
+	"name": "Orders_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "copy_globalmartdata_ls",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "GlobalMartDataSource"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "orders.csv",
+				"container": "globalmart-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "order_id",
+				"type": "String"
+			},
+			{
+				"name": "customer_id",
+				"type": "String"
+			},
+			{
+				"name": "vendor_id",
+				"type": "String"
+			},
+			{
+				"name": "ship_mode",
+				"type": "String"
+			},
+			{
+				"name": "order_status",
+				"type": "String"
+			},
+			{
+				"name": "order_purchase_date",
+				"type": "String"
+			},
+			{
+				"name": "order_approved_at",
+				"type": "String"
+			},
+			{
+				"name": "order_delivered_carrier_date",
+				"type": "String"
+			},
+			{
+				"name": "order_delivered_customer_date",
+				"type": "String"
+			},
+			{
+				"name": "order_estimated_delivery_date",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

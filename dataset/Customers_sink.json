@@ -1,0 +1,57 @@
+{
+	"name": "Customers_sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "paste_globalmartdata_ls",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "GlobalMartDataSink"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "customer_id",
+				"type": "varchar"
+			},
+			{
+				"name": "customer_email",
+				"type": "varchar"
+			},
+			{
+				"name": "customer_name",
+				"type": "varchar"
+			},
+			{
+				"name": "segment",
+				"type": "varchar"
+			},
+			{
+				"name": "country",
+				"type": "varchar"
+			},
+			{
+				"name": "city",
+				"type": "varchar"
+			},
+			{
+				"name": "state",
+				"type": "varchar"
+			},
+			{
+				"name": "postal_code",
+				"type": "varchar"
+			},
+			{
+				"name": "region",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "customers"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,9 @@
+{
+	"name": "tejaswimskltreddatafactory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "73e063b5-b863-4920-bee7-a1dd84a70801",
+		"tenantId": "5b043196-3310-48fe-b9f9-d40f8e20ec02"
+	}
+}

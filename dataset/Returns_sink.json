@@ -1,0 +1,29 @@
+{
+	"name": "Returns_sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "paste_globalmartdata_ls",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "GlobalMartDataSink"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "order_id",
+				"type": "varchar"
+			},
+			{
+				"name": "return_reason",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "returns"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

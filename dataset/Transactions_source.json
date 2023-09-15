@@ -1,0 +1,58 @@
+{
+	"name": "Transactions_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "copy_globalmartdata_ls",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "GlobalMartDataSource"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "43dfefae55f243aea334ae3f41d8f0e",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "transactions.xlsx",
+				"container": "globalmart-data"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "order_id",
+				"type": "String"
+			},
+			{
+				"name": "product_id",
+				"type": "String"
+			},
+			{
+				"name": "sales",
+				"type": "String"
+			},
+			{
+				"name": "quantity",
+				"type": "String"
+			},
+			{
+				"name": "discount",
+				"type": "String"
+			},
+			{
+				"name": "profit",
+				"type": "String"
+			},
+			{
+				"name": "payment_type",
+				"type": "String"
+			},
+			{
+				"name": "payment_installments",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

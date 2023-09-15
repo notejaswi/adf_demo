@@ -1,0 +1,36 @@
+{
+	"name": "Vendors_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "copy_globalmartdata_ls",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "GlobalMartDataSource"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "vendors.csv",
+				"container": "globalmart-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "vendor_id",
+				"type": "String"
+			},
+			{
+				"name": "vendor_name",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

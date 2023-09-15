@@ -1,0 +1,85 @@
+{
+	"name": "avg_purchase_freq",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Orders_sink",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText3",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				},
+				{
+					"name": "aggregate1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          order_id as string,",
+				"          customer_id as string,",
+				"          vendor_id as string,",
+				"          ship_mode as string,",
+				"          order_status as string,",
+				"          order_purchase_date as timestamp,",
+				"          order_approved_at as timestamp,",
+				"          order_delivered_carrier_date as timestamp,",
+				"          order_delivered_customer_date as timestamp,",
+				"          order_estimated_delivery_date as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"source1 select(mapColumn(",
+				"          customer_id,",
+				"          order_id,",
+				"          order_purchase_date",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 aggregate(groupBy(customer_id),",
+				"     period = (max(order_purchase_date)-min(order_purchase_date))/86400000,",
+				"          no_of_orders = countDistinct(order_id)) ~> aggregate1",
+				"aggregate1 derive(avg_frequency_orders_per_day = no_of_orders/period) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          customer_id,",
+				"          {avg_frequency } = avg_frequency_orders_per_day",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          customer_id as string,",
+				"          order_id as string,",
+				"          Review as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}
