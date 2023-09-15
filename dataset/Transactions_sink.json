@@ -1,0 +1,61 @@
+{
+	"name": "Transactions_sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "paste_globalmartdata_ls",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "GlobalMartDataSink"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "order_id",
+				"type": "varchar"
+			},
+			{
+				"name": "product_id",
+				"type": "varchar"
+			},
+			{
+				"name": "sales",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "quantity",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "discount",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 2
+			},
+			{
+				"name": "profit",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "payment_type",
+				"type": "varchar"
+			},
+			{
+				"name": "payment_installments",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "transactions"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

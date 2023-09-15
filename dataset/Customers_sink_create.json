@@ -1,0 +1,20 @@
+{
+	"name": "Customers_sink_create",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "paste_globalmartdata_ls",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "GlobalMartDataSink"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "globalmartcustomers"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

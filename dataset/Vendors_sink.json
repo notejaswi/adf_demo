@@ -1,0 +1,29 @@
+{
+	"name": "Vendors_sink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "paste_globalmartdata_ls",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "GlobalMartDataSink"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "vendor_id",
+				"type": "varchar"
+			},
+			{
+				"name": "vendor_name",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vendors"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
