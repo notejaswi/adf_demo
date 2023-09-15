@@ -1,0 +1,17 @@
+{
+	"name": "CreateDatabase",
+	"properties": {
+		"content": {
+			"query": "create DATABASE globalmart;\nALTER DATABASE globalmart COLLATE Latin1_General_100_BIN2_UTF8\nGO\nUSE globalmart\nGO\ncreate schema bronze\nGO\ncreate schema silver\nGO\ncreate schema gold\nGO\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "globalmart",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

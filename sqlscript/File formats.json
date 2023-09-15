@@ -1,0 +1,17 @@
+{
+	"name": "File formats",
+	"properties": {
+		"content": {
+			"query": "use globalmart;\nGO\nif not EXISTS (select * from sys.external_file_formats where name='csv_file_format')\nCREATE EXTERNAL FILE FORMAT csv_file_format\nwith(\n    FORMAT_TYPE=DELIMITEDTEXT,\n    FORMAT_OPTIONS(\n        FIELD_TERMINATOR=',',\n        STRING_DELIMITER='\"',\n        FIRST_ROW=2,\n        USE_TYPE_DEFAULT=FALSE,\n        ENCODING='UTF8',\n        PARSER_VERSION='2.0')\n    );\nif not EXISTS (select * from sys.external_file_formats where name='json_file_format')\nCREATE EXTERNAL FILE FORMAT json_file_format\nWITH (\n    FORMAT_TYPE = JSON\n);\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "globalmart",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

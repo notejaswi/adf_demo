@@ -1,0 +1,17 @@
+{
+	"name": "CreateExternalDataSource",
+	"properties": {
+		"content": {
+			"query": "use globalmart;\ncreate master key ENCRYPTION by PASSWORD='globalmart@123';\n\ncreate database scoped CREDENTIAL adls_cred_sas4\nwith IDENTITY ='SHARED ACCESS SIGNATURE',\nSECRET='sp=racwd&st=2023-09-06T05:05:17Z&se=2023-09-21T13:05:17Z&spr=https&sv=2022-11-02&sr=c&sig=VRVDHU5eAPsNyKrn4pf8iVuNLAMUpg8LEhfm88%2FU%2Bjk%3D'\n\nif not EXISTS (select * from sys.external_data_sources where name='data_source_1')\n    CREATE EXTERNAL DATA SOURCE data_source_1\n    WITH(\n        location='https://miniproject3msktred.dfs.core.windows.net/globalmartdata',\n        CREDENTIAL = adls_cred_sas4\n    );\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "globalmart",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

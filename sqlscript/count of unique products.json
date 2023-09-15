@@ -1,0 +1,17 @@
+{
+	"name": "count of unique products",
+	"properties": {
+		"content": {
+			"query": "-- This is auto-generated code\nSELECT \n    count(distinct(JSON_VALUE(value, '$.product_id'))) as CountOfDistinctProducts\nFROM\n    OPENROWSET(\n        BULK 'https://miniproject3msktred.dfs.core.windows.net/globalmartdata/products.json',\n        FORMAT = 'CSV',\n        FIELDQUOTE = '0x0b',\n        FIELDTERMINATOR ='0x0b',\n        ROWTERMINATOR = '0x0b'\n    )\n    with (doc nvarchar(max)) as rows\n    CROSS APPLY OPENJSON(doc) \n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "master",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

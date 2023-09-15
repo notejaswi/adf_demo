@@ -1,0 +1,17 @@
+{
+	"name": "CETAS customers_by_region",
+	"properties": {
+		"content": {
+			"query": "\nCREATE EXTERNAL TABLE customers_by_region\nwith(\n    LOCATION = 'aggregated_data/',\n    DATA_SOURCE = data_source_1,  \n    FILE_FORMAT = csv_file_format\n)  \nAS\nSELECT region, count(distinct(customer_id)) as disctinct_customers\nFROM \n    OPENROWSET(\n        BULK 'https://miniproject3msktred.dfs.core.windows.net/globalmartdata/customers.csv',\n        FORMAT = 'CSV',\n        HEADER_ROW= True,\n        PARSER_VERSION = '2.0',\n        FIELDTERMINATOR=',',\n        ROWTERMINATOR='\\n'\n    ) AS [r]\nGROUP BY region\nGO\nselect * from customers_by_region",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "globalmart",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

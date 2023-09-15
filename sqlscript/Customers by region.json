@@ -1,0 +1,17 @@
+{
+	"name": "Customers by region",
+	"properties": {
+		"content": {
+			"query": "-- This is auto-generated code\nSELECT\n    region, COUNT(DISTINCT(customer_id)) as DistinctCustomers\nFROM\n    OPENROWSET(\n        BULK 'https://miniproject3msktred.dfs.core.windows.net/globalmartdata/customers.csv',\n        FORMAT = 'CSV',\n        HEADER_ROW= True,\n        PARSER_VERSION = '2.0',\n        FIELDTERMINATOR=',',\n        ROWTERMINATOR='\\n'\n    ) AS [result]\ngroup by region\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "master",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

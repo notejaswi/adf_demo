@@ -1,0 +1,17 @@
+{
+	"name": "Create Tables",
+	"properties": {
+		"content": {
+			"query": "use globalmart;\nGO\nCREATE EXTERNAL TABLE bronze.customers\n(\n    customer_id VARCHAR(100),\n    customer_email VARCHAR(255),\n    customer_name VARCHAR(100),\n    segment VARCHAR(100),\n    country VARCHAR(100),\n    city VARCHAR(100),\n    state VARCHAR(100),\n    postal_code INT,\n    region VARCHAR(100) )\nwith(\n    LOCATION='customers.csv',\n    data_source=gm_data_source,\n    FILE_FORMAT=csv_file_format,\n    reject_value=10,\n    rejected_row_location='rejections/customers'\n);\nselect top 10* from bronze.customers\n\nuse globalmart;\nGO\nCREATE EXTERNAL TABLE bronze.orders\n(\n    order_id varchar(100),\n    customer_id varchar(100),\n    vendor_id varchar(100),\n    ship_mode varchar(100),\n    order_status varchar(100),\n    order_purchase_date varchar(100),\n    order_approved_at varchar(100),\n    order_delivered_carrier_date varchar(100),\n    order_delivered_customer_date varchar(100),\n    order_estimated_delivery_date varchar(100) )\nwith(\n    LOCATION='Orders_1.csv',\n    data_source=gm_data_source,\n    FILE_FORMAT=csv_file_format,\n    reject_value=10,\n    rejected_row_location='rejections/orders'\n);\nselect top 10* from bronze.orders\n\nuse globalmart;\nGO\nCREATE EXTERNAL TABLE bronze.vendors\n(\n    vendor_id varchar(100) ,\n    vendor_name varchar(100) )\nwith(\n    LOCATION='vendors.csv',\n    data_source=gm_data_source,\n    FILE_FORMAT=csv_file_format,\n    reject_value=10,\n    rejected_row_location='rejections/vendors'\n);\nselect top 10* from bronze.vendors",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "globalmart",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

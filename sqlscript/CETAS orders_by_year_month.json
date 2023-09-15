@@ -1,0 +1,17 @@
+{
+	"name": "CETAS orders_by_year_month",
+	"properties": {
+		"content": {
+			"query": "use globalmart\nGO\nCREATE EXTERNAL TABLE orders_by_year_and_month\nwith(\n    LOCATION = 'aggregated_data2/',\n    DATA_SOURCE = data_source_1,  \n    FILE_FORMAT = csv_file_format\n)  \nAS\nSELECT \n    YEAR(CAST(order_approved_at AS DATE)) AS year,\n    MONTH(CAST(order_approved_at AS DATE)) AS month,\n    count(distinct(order_id)) as CountOfOrders\nFROM \n    OPENROWSET(\n        BULK 'https://miniproject3msktred.dfs.core.windows.net/globalmartdata/Orders_1.csv',\n        FORMAT = 'CSV',\n        HEADER_ROW= True,\n        PARSER_VERSION = '2.0',\n        FIELDTERMINATOR=',',\n        ROWTERMINATOR='\\n'\n    ) AS [r]\ngroup by YEAR(CAST(order_approved_at AS DATE)),MONTH(CAST(order_approved_at AS DATE))\norder by YEAR(CAST(order_approved_at AS DATE)),MONTH(CAST(order_approved_at AS DATE))\nGO\nselect * from orders_by_year_month",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "globalmart",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
